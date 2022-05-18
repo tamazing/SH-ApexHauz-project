@@ -4,14 +4,13 @@
 
 ApexHauz is a platform where people can create and/or search properties for sale or rent
 
-
 ## Required features
 
 - User can sign up
 - User can sign in
 - User can post a property advert
 - User can update the details of a property advert
-- User can mark  his/her posted advert as sold
+- User can mark his/her posted advert as sold
 - User can delete his/her property advert
 - User can view all property adverts
 - User can view all properties of a specific type - 2 bedrooms, 3 bedrooms, mini flat etc
@@ -32,9 +31,9 @@ These are the steps you ought to take to get ready to start building the project
 
 ## Summary
 
-You are expected to create a set of API endpoints defined in the API Endpoints Specification section and use MySQL to store data
+- You are expected to create a set of API endpoints defined in the API Endpoints Specification section and use MySQL to store data
 
-NB: You are to create pull request(PR) for each feature in the challenge and then merge it into your main branch
+- NB: You are to create pull request(PR) for each feature in the challenge and then merge it into your main branch
 
 ## Tools
 
@@ -46,16 +45,23 @@ NB: You are to create pull request(PR) for each feature in the challenge and the
 
 ## Guidelines
 
-Version your API using URL versioning starting with the letter "v". Avoid dot notation as 1.0. An example of this will be: https://example.com/api/v1
-Setup the server-side of the application using expressjs
-Use separate branches for each feature
-Use Cloudinary to store your images and only save the URL in your application's database
-On GitHub, create a GitHub project with a basic Kanban board
-On GitHub under GitHub issues, create the following issues and attach them to your created project: user can signup, user can sign in, user can post a property advert, user can update the details of a property advert, user can mark his/her posted advert as sold, user can delete his/her advert, user can view all properties, user can view all properties of a specific type, user can view a specific property
-Under GitHub issues, create issues to capture any other tasks not captured above.
-API Response Specification
+- Version your API using URL versioning starting with the letter "v". Avoid dot notation as 1.0. An example of this will be: https://example.com/api/v1
 
-The API endpoints should respond with the appropriate HTTP response status code and a JSON object with contains either a data property(on success) or an error property(on failure). When present, the data is always an object or an array.
+- Setup the server-side of the application using expressjs
+
+- Use separate branches for each feature
+
+- Use Cloudinary to store your images and only save the URL in your application's database
+
+- On GitHub, create a GitHub project with a basic Kanban board
+
+- On GitHub under GitHub issues, create the following issues and attach them to your created project: user can signup, user can sign in, user can post a property advert, user can update the details of a property advert, user can mark his/her posted advert as sold, user can delete his/her advert, user can view all properties, user can view all properties of a specific type, user can view a specific property
+
+- Under GitHub issues, create issues to capture any other tasks not captured above.
+
+## API Response Specification
+
+- The API endpoints should respond with the appropriate HTTP response status code and a JSON object with contains either a data property(on success) or an error property(on failure). When present, the data is always an object or an array.
 
 On success
 
@@ -143,9 +149,7 @@ Reports
 
 }
 
-
-
-API Endpoint Specification
+## API Endpoint Specification
 
 POST /auth/signup: Create user account
 
@@ -368,8 +372,6 @@ GET /property/<:property-id>: Get a specific property by ID
     }
 
 }
-
-
 
 GET /property: Get all properties
 
