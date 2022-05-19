@@ -2,6 +2,8 @@ const bcryptjs = require("bcryptjs");
 const User = require("../models/user.model.js");
 const { MESSAGES, HTTP_REQUEST_CODES } = require("../../libs/constants");
 const { createError, generateError } = require("../../libs/error.js");
+const { generateSuccessData } = require("../../libs/index.js");
+const jwt = require("jsonwebtoken");
 
 exports.register = (req, res, next) => {
   try {
@@ -57,9 +59,23 @@ exports.register = (req, res, next) => {
           if (err) {
             createError(MESSAGES.NEW_ACCOUNT_ERROR);
           } else {
+            const token = jwt.sign(
+              {
+                id: data.id,
+                email: data.email,
+                is_admin: Boolean(data.is_admin),
+              },
+              process.env.JWT_SECRET_KEY,
+              { expiresIn: "7d" }
+            );
             res
               .status(200)
-              .json({ message: MESSAGES.NEW_ACCOUNT_SUCCESSFUL, data });
+              .json(
+                generateSuccessData(MESSAGES.NEW_ACCOUNT_SUCCESSFUL, {
+                  ...data,
+                  token,
+                })
+              );
           }
         });
       }
