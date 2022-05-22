@@ -59,7 +59,7 @@ exports.register = (req, res, next) => {
             createError(MESSAGES.NEW_ACCOUNT_ERROR);
           } else {
             const token = generateToken(data, process.env.JWT_SECRET_KEY);
-            res.status(200).json(
+            res.status(HTTP_REQUEST_CODES.CREATED).json(
               generateSuccessData(MESSAGES.NEW_ACCOUNT_SUCCESSFUL, {
                 ...data,
                 token,
@@ -110,7 +110,7 @@ exports.signin = async (req, res, next) => {
           delete data.password;
           const token = generateToken(data, process.env.JWT_SECRET_KEY);
 
-          res.status(200).json(
+          res.status(HTTP_REQUEST_CODES.OK).json(
             generateSuccessData(MESSAGES.LOGIN_SUCCESSFUL, {
               token,
               ...data,
