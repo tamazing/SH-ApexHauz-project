@@ -113,10 +113,23 @@ const getPropertyById = (req, res) => {
     .json(generateSuccessData(MESSAGES.DATA_FETCH_SUCCESSFUL, req.property));
 };
 
+const getAllProperties = (req, res, next) => {
+  Property.getAll((err, result) => {
+    if (err) {
+      next(createError(MESSAGES.DATA_FETCH_ERR));
+    } else {
+      res
+        .status(HTTP_REQUEST_CODES.OK)
+        .json(generateSuccessData(MESSAGES.DATA_FETCH_SUCCESSFUL, result));
+    }
+  });
+};
+
 module.exports = {
   create,
   updateColumn,
   updateStatus,
   delete_,
   getPropertyById,
+  getAllProperties,
 };
