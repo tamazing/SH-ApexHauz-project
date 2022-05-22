@@ -92,8 +92,24 @@ const updateStatus = (req, res, next) => {
   });
 };
 
+const delete_ = (req, res, next) => {
+  const property = req.property;
+  Property.delete(property.id, (err, result) => {
+    if (err) {
+      next(createError(MESSAGES.PROPERTY_DELETED_ERR));
+    } else {
+      res
+        .status(HTTP_REQUEST_CODES.OK)
+        .json(
+          generateSuccessData(MESSAGES.PROPERTY_DELETED_SUCCESSFUL, property)
+        );
+    }
+  });
+};
+
 module.exports = {
   create,
   updateColumn,
   updateStatus,
+  delete_,
 };

@@ -73,6 +73,20 @@ class Property {
       }
     );
   }
+  static delete(id, callBack) {
+    db.query("DELETE FROM properties WHERE id = ?", id, (err, res) => {
+      if (err) {
+        console.log(`Delete Property Error: ${err.message}`);
+        callBack(null, err);
+        return;
+      }
+      if (res.affectedRows == 0) {
+        callBack({ message: MESSAGES.NOT_FOUND }, null);
+        return;
+      }
+      callBack(null, res);
+    });
+  }
 }
 
 module.exports = Property;
