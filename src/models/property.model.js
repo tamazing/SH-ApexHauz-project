@@ -87,6 +87,16 @@ class Property {
       callBack(null, res);
     });
   }
+  static getAll(callBack) {
+    db.query("SELECT * FROM properties", (err, res) => {
+      if (err) {
+        console.log(`Get All Properties Error: ${err.message}`);
+        callBack(null, err);
+        return;
+      }
+      callBack(null, res);
+    });
+  }
 }
 
 module.exports = Property;

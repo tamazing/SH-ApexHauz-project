@@ -39,7 +39,8 @@ const MESSAGES = {
   LOGIN_REQUIRED: "Please login first before you can access that route",
   ADMIN_REQUIRED: "Sorry! only Admin can access that route",
   NO_DATA_TO_DISPLAY: "SORRY! NO DATA AVAILABLE TO DISPLAY",
-  DATA_FETCH_SUCCESSFUL: "Your data has been fetched successfully",
+  DATA_FETCH_SUCCESSFUL: "Data fetched successfully",
+  DATA_FETCH_ERR: "An error occurred while fetching the data. Please try again",
   NOT_FOUND:
     "Sorry! we can't find the data you're looking for with the details supplied",
   NO_ACCESS_TO_ROUTE: "Oops! You don't have access to this route",
