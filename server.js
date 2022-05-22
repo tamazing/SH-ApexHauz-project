@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const logger = require("morgan");
 const { ROUTES, HTTP_REQUEST_CODES, MESSAGES } = require("./libs/constants.js");
 const userRouter = require("./src/routes/user.routes.js");
 const authRouter = require("./src/routes/auth.routes.js");
@@ -13,6 +14,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(logger("dev"));
 
 //API ROUTES
 app.get(ROUTES.GENERAL, (req, res) => {

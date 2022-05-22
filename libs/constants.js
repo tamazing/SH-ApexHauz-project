@@ -29,6 +29,8 @@ const MESSAGES = {
   INVALID_REQUEST_NO_BODY: "Invalid Request, body content missing",
   INVALID_REQUEST_FIELD_MISSING:
     "Invalid Request, one of the required fields is missing",
+  INVALID_REQUEST_FIELD:
+    "Invalid Request, one of the supplied fields is not valid",
   BAD_REQUEST: "Bad Request, please try again with valid request data",
   NO_VALID_CREDENTIALS: "No credentials supplied, Please try again",
   INVALID_CREDENTIALS: "Sorry! Invalid credentials supplied, Please try again",

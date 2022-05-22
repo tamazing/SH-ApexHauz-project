@@ -57,6 +57,22 @@ class Property {
       }
     );
   }
+  static updateColumn(property, column, newValue, callBack) {
+    db.query(
+      `UPDATE properties SET ${column} = ? WHERE id = ?`,
+      [newValue, property.id],
+      (err, results) => {
+        if (err) {
+          console.log(`Update Property Column Error: ${err.message}`);
+          callBack(err, null);
+        } else if (!results.affectedRows) {
+          callBack({ message: MESSAGES.NOT_FOUND }, null);
+        } else {
+          callBack(null, property);
+        }
+      }
+    );
+  }
 }
 
 module.exports = Property;

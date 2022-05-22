@@ -48,14 +48,45 @@ const create = async (req, res, next) => {
 
 const update = (req, res, next) => {
   try {
-    console.log(req.body);
-    return res
-      .status(200)
-      .json(
-        generateSuccessData(MESSAGES.PROPERTY_UPDATED_SUCCESSFUL, {
-          ...req.property,
-        })
+    const keys = Object.keys(req.body);
+    const property = req.property;
+
+    if (!keys.length) {
+      next(
+        createError(
+          MESSAGES.INVALID_REQUEST_NO_BODY,
+          HTTP_REQUEST_CODES.BAD_REQUEST
+        )
       );
+      return;
+    }
+    const propertyKeys = Object.keys(property);
+    if (!keys.every((k) => propertyKeys.includes(k))) {
+      next(
+        createError(
+          MESSAGES.INVALID_REQUEST_FIELD,
+          HTTP_REQUEST_CODES.BAD_REQUEST
+        )
+      );
+      return;
+    }
+    keys.forEach((key, i) => {
+      Property.updateColumn(property, key, req.body[key], (err, _) => {
+        if (err) {
+          next(createError(MESSAGES.PROPERTY_UPDATED_ERR));
+        } else {
+          property[key] = req.body[key];
+          if (i === keys.length - 1) {
+            res.status(200).json(
+              generateSuccessData(MESSAGES.PROPERTY_UPDATED_SUCCESSFUL, {
+                property,
+              })
+            );
+            return;
+          }
+        }
+      });
+    });
   } catch (err) {
     next(err);
   }
