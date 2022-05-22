@@ -4,9 +4,18 @@ const ROUTES = {
   GENERAL: `${API_VERSION_ROUTE}/`,
   AUTH: `${API_VERSION_ROUTE}/auth`,
   USERS: `${API_VERSION_ROUTE}/users`,
+  PROPERTY: `${API_VERSION_ROUTE}/property`,
 };
 
 const MESSAGES = {
+  NEW_PROPERTY_SUCCESSFUL: "New Property created successfully",
+  NEW_PROPERTY_ERR: "An error while creating your Property. Please try again",
+  PROPERTY_UPDATED_SUCCESSFUL: "Your property has been updated successfully",
+  PROPERTY_UPDATED_ERR:
+    "An error while updating your Property. Please try again",
+  PROPERTY_DELETED_SUCCESSFUL: "Your property has been deleted successfully",
+  PROPERTY_DELETED_ERR:
+    "An error while deleting your Property. Please try again",
   ACCOUNT_EXIST:
     "Sorry, An account already exist with one of the details supplied",
   NEW_ACCOUNT_SUCCESSFUL: "Account created successfully",

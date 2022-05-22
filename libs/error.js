@@ -7,7 +7,7 @@ class CustomError extends Error {
   }
 }
 
-const createError = (msg, statusCode = 500, data = null, type = "throw") => {
+const createError = (msg, statusCode = 500, data = null, type = "create") => {
   switch (type) {
     case "create":
       return new CustomError(msg, statusCode, data);

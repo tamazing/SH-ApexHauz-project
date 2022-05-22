@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const { ROUTES, HTTP_REQUEST_CODES } = require("./libs/constants.js");
+const { ROUTES, HTTP_REQUEST_CODES, MESSAGES } = require("./libs/constants.js");
 const userRouter = require("./src/routes/user.routes.js");
 const authRouter = require("./src/routes/auth.routes.js");
+const propertyRouter = require("./src/routes/property.routes.js");
 const { generateError } = require("./libs/error.js");
 
 require("dotenv").config();
@@ -19,6 +20,11 @@ app.get(ROUTES.GENERAL, (req, res) => {
 });
 app.use(ROUTES.USERS, userRouter);
 app.use(ROUTES.AUTH, authRouter);
+app.use(ROUTES.PROPERTY, propertyRouter);
+
+app.all("*", (req, res) => {
+  res.status(404).json(generateError("Request Not Found"));
+});
 
 //ERROR MIDDLEWARE
 app.use((err, _, res, __) => {
