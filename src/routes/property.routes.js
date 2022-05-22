@@ -5,6 +5,6 @@ const { validateParam } = require("../middleware/property.middleware");
 
 propertyRouter.param("propertyId", validateParam);
 propertyRouter.post("/", userRequired, create);
-propertyRouter.put("/:propertyId", userRequired, update);
+propertyRouter.patch("/:propertyId", userRequired, update);
 
 module.exports = propertyRouter;
