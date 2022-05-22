@@ -107,9 +107,16 @@ const delete_ = (req, res, next) => {
   });
 };
 
+const getPropertyById = (req, res) => {
+  res
+    .status(HTTP_REQUEST_CODES.OK)
+    .json(generateSuccessData(MESSAGES.DATA_FETCH_SUCCESSFUL, req.property));
+};
+
 module.exports = {
   create,
   updateColumn,
   updateStatus,
   delete_,
+  getPropertyById,
 };
