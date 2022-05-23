@@ -8,6 +8,8 @@ const ROUTES = {
 };
 
 const MESSAGES = {
+  IMAGE_UPLOAD_SUCCESSFUL: "Your image has been uploaded successfully",
+  IMAGE_UPLOAD_ERR: "Sorry, an error occurred while uploading your image",
   NEW_PROPERTY_SUCCESSFUL: "New Property created successfully",
   NEW_PROPERTY_ERR: "An error while creating your Property. Please try again",
   PROPERTY_UPDATED_SUCCESSFUL: "Your property has been updated successfully",
@@ -47,6 +49,8 @@ const MESSAGES = {
   GENERAL_ERROR_MESSAGE:
     "Oops! Something went wrong with your request. please try again",
   METHOD_NOT_ALLOWED: "Sorry, Method not allowed or not yet supported",
+  INVALID_IMAGE_TYPE:
+    "Sorry, invalid image supplied. We only support .jpg, .jpeg or .png image",
 };
 
 const HTTP_REQUEST_CODES = {

@@ -1,35 +1,45 @@
-const { generateSuccessData } = require("../../libs");
-const { MESSAGES, HTTP_REQUEST_CODES } = require("../../libs/constants");
-const { createError } = require("../../libs/error");
+const { generateSuccessData } = require("../libs");
+const { MESSAGES, HTTP_REQUEST_CODES } = require("../libs/constants");
+const { createError } = require("../libs/error");
+const uploadImage = require("../libs/image_upload");
 const Property = require("../models/property.model");
 
 const create = async (req, res, next) => {
-  const { status, price, state, city, address, type, image_url } = req.body;
-  if (!status || !price || !state || !city || !address || !type || !image_url) {
-    createError(MESSAGES.BAD_REQUEST, HTTP_REQUEST_CODES.BAD_REQUEST);
+  const { status, price, state, city, address, type } = req.body;
+
+  if (!status || !price || !state || !city || !address || !type || !req.file) {
+    next(createError(MESSAGES.BAD_REQUEST, HTTP_REQUEST_CODES.BAD_REQUEST));
     return;
   }
-  const newProperty = new Property(
-    req.user_id,
-    status,
-    price,
-    state,
-    city,
-    address,
-    type,
-    image_url
-  );
-  Property.create(newProperty, (err, data) => {
+
+  uploadImage(req.file, (err, result) => {
     if (err) {
-      next(createError(MESSAGES.NEW_PROPERTY_ERR, 500));
+      next(err);
     } else {
-      console.log(data);
-      res.status(HTTP_REQUEST_CODES.CREATED).json(
-        generateSuccessData(MESSAGES.NEW_PROPERTY_SUCCESSFUL, {
-          id: data.insertId,
-          ...newProperty,
-        })
+      const image_url = result.url;
+      console.log(image_url);
+      const newProperty = new Property(
+        req.user_id,
+        status,
+        price,
+        state,
+        city,
+        address,
+        type,
+        image_url
       );
+      Property.create(newProperty, (err, data) => {
+        if (err) {
+          next(createError(MESSAGES.NEW_PROPERTY_ERR));
+        } else {
+          res.status(HTTP_REQUEST_CODES.CREATED).json(
+            generateSuccessData(MESSAGES.NEW_PROPERTY_SUCCESSFUL, {
+              id: data.insertId,
+              ...newProperty,
+            })
+          );
+        }
+      });
     }
   });
 };

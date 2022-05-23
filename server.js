@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
-const { ROUTES, HTTP_REQUEST_CODES, MESSAGES } = require("./libs/constants.js");
+const { ROUTES, HTTP_REQUEST_CODES } = require("./src/libs/constants.js");
 const userRouter = require("./src/routes/user.routes.js");
 const authRouter = require("./src/routes/auth.routes.js");
 const propertyRouter = require("./src/routes/property.routes.js");
-const { generateError } = require("./libs/error.js");
+const { generateError } = require("./src/libs/error.js");
 
 require("dotenv").config();
 
@@ -36,11 +36,15 @@ app.use((err, _, res, __) => {
     .json(generateError(err.message));
 });
 
-const runServer = () => {
+const start = () => {
   const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}.`);
-  });
+  if (require.main === module) {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}.`);
+    });
+  } else {
+    return app;
+  }
 };
 
-runServer();
+start();

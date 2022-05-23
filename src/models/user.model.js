@@ -1,4 +1,4 @@
-const { MESSAGES } = require("../../libs/constants");
+const { MESSAGES } = require("../libs/constants");
 const db = require("../config/db.config");
 
 class User {
