@@ -1,5 +1,5 @@
-const { MESSAGES, HTTP_REQUEST_CODES } = require("../../libs/constants");
-const { createError } = require("../../libs/error");
+const { MESSAGES, HTTP_REQUEST_CODES } = require("../libs/constants");
+const { createError } = require("../libs/error");
 const db = require("../config/db.config");
 
 class Property {

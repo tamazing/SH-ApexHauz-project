@@ -1,8 +1,8 @@
 const bcryptjs = require("bcryptjs");
 const User = require("../models/user.model.js");
-const { MESSAGES, HTTP_REQUEST_CODES } = require("../../libs/constants");
-const { createError, generateError } = require("../../libs/error.js");
-const { generateSuccessData, generateToken } = require("../../libs/index.js");
+const { MESSAGES, HTTP_REQUEST_CODES } = require("../libs/constants");
+const { createError, generateError } = require("../libs/error.js");
+const { generateSuccessData, generateToken } = require("../libs/index.js");
 
 exports.register = (req, res, next) => {
   try {

@@ -1,4 +1,4 @@
-const { generateError } = require("../../libs/error");
+const { generateError } = require("../libs/error");
 const Property = require("../models/property.model");
 
 const validateParam = (req, res, next, id) => {
