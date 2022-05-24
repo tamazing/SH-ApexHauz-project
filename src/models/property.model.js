@@ -14,6 +14,10 @@ class Property {
     this.image_url = image_url;
   }
 
+  static db() {
+    return db;
+  }
+
   static create(newProperty, callBack) {
     console.log(newProperty);
     db.query(
@@ -95,6 +99,21 @@ class Property {
         return;
       }
       callBack(null, res);
+    });
+  }
+  static query(query, callBack) {
+    db.query(query.sql, query.params, (err, properties) => {
+      if (err) {
+        console.log(`Query Property Error: ${err.message}`);
+        callBack(err, null);
+      } else if (properties.length) {
+        callBack(null, properties);
+      } else {
+        callBack(
+          createError(MESSAGES.NOT_FOUND, HTTP_REQUEST_CODES.NOT_FOUND),
+          null
+        );
+      }
     });
   }
 }

@@ -135,6 +135,38 @@ const getAllProperties = (req, res, next) => {
   });
 };
 
+const search = (req, res, next) => {
+  const { propertyType } = req.query;
+  if (!propertyType) {
+    next(
+      createError(
+        MESSAGES.INVALID_REQUEST_FIELD_MISSING,
+        HTTP_REQUEST_CODES.BAD_REQUEST
+      )
+    );
+    return;
+  }
+  const query = {
+    sql: `SELECT * FROM properties WHERE type REGEXP ?`,
+    params: [`.*${propertyType}.*`],
+  };
+  Property.query(query, (err, results) => {
+    if (err) {
+      console.log(err);
+      next(
+        createError(
+          err.message || MESSAGES.DATA_FETCH_ERR,
+          err.statusCode || HTTP_REQUEST_CODES.SERVER_ERROR
+        )
+      );
+    } else {
+      res
+        .status(HTTP_REQUEST_CODES.OK)
+        .json(generateSuccessData(MESSAGES.DATA_FETCH_SUCCESSFUL, results));
+    }
+  });
+};
+
 module.exports = {
   create,
   updateColumn,
@@ -142,4 +174,5 @@ module.exports = {
   delete_,
   getPropertyById,
   getAllProperties,
+  search,
 };
