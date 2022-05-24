@@ -7,6 +7,7 @@ const {
   delete_,
   getPropertyById,
   getAllProperties,
+  search,
 } = require("../controllers/property.controller");
 const { validateParam } = require("../middleware/property.middleware");
 const { uploadFile } = require("../middleware/general.middleware");
@@ -14,6 +15,7 @@ const { uploadFile } = require("../middleware/general.middleware");
 propertyRouter.param("propertyId", validateParam);
 
 propertyRouter.get("/", getAllProperties);
+propertyRouter.get("/search", search);
 propertyRouter.get("/:propertyId", getPropertyById);
 
 propertyRouter.post("/", userRequired, uploadFile(), create);
