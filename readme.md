@@ -1,4 +1,4 @@
-# UILD A PRODUCT: ApexHauz
+# ApexHauz Project
 
 ## Project Overview
 
